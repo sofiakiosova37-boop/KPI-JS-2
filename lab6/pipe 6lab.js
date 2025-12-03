@@ -4,7 +4,7 @@ const pipe = (...fns) => {
   
   for (const fn of fns) {
     if (typeof fn !== 'function') {
-      throw new TypeError('All arguments to pipe must be functions');
+      throw new TypeError('All arguments must be functions');
     }
   }
 
@@ -19,4 +19,5 @@ const cube = x => x ** 3;
 
 const f = pipe(inc, twice, cube);
 console.log(f(5));
+
 
