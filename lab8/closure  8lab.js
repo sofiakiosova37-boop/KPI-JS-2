@@ -5,7 +5,8 @@ const store = (value) => {
 const read = store(5);
 
 const value = read(); 
-console.log(value); // 5
+console.log(value); 
 
 const read2 = store("Hello");
-console.log(read2()); // "Hello"
+console.log(read2()); 
+
