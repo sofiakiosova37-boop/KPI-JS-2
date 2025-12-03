@@ -12,3 +12,11 @@ const arr = [1, 2, 3, 2, 4, 5];
 removeElements(arr, 2, 4);
 
 console.log(arr); 
+
+const array = ["Kiev", "Beijing", "Lima", "Saratov"];
+
+removeElements(array,"Kiev", "Berlin");
+
+console.log(array); 
+
+
