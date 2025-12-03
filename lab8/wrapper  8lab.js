@@ -1,23 +1,27 @@
 const contract = (fn, ...types) => {
   return (...args) => {
+    const resultType = types[types.length - 1];
+    const argTypes = types.slice(0, -1);
 
-    for (let i = 0; i < types.length - 1; i++) {
-      if (typeof args[i] !== types[i].name.toLowerCase()) {
+    if (args.length !== argTypes.length) {
+      throw new Error(
+        `Expected ${argTypes.length} arguments, but got ${args.length}`
+      );
+    }
+
+    for (let i = 0; i < argTypes.length; i++) {
+      if (typeof args[i] !== argTypes[i].name.toLowerCase()) {
         throw new TypeError(
-          `Argument type should be ${types[i].name}`
+          `Argument ${i} should be ${argTypes[i].name}, but got ${typeof args[i]}`
         );
       }
     }
 
-
     const result = fn(...args);
 
-    const expectedType = types[types.length - 1];
-
-
-    if (typeof result !== expectedType.name.toLowerCase()) {
+    if (typeof result !== resultType.name.toLowerCase()) {
       throw new TypeError(
-        `Return value should be ${expectedType.name}`
+        `Return value should be ${resultType.name}, but got ${typeof result}`
       );
     }
 
@@ -27,4 +31,5 @@ const contract = (fn, ...types) => {
 
 const add = (a, b) => a + b;
 const addNumbers = contract(add, Number, Number, Number);
-console.log(addNumbers(2, 3)); 
+console.log(addNumbers(2, 3));
+
