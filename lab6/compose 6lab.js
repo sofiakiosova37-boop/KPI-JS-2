@@ -32,7 +32,11 @@ const f1 = compose(inc, twice, cube);
 console.log(f1(5));
 
 
-const f2 = compose(inc, cube, twice);
+const f2 = compose(inc, inc, twice);
 
 console.log(f2(5));
+
+console.log(compose(inc, 7, cube)(2));
+
+
 
