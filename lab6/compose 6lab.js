@@ -1,14 +1,14 @@
 const compose = (...fns) => {
   const error = [];
 
-  const composed = x => {
+  const composed = (x) => {
     try {
       for (let i = fns.length - 1; i >= 0; i--) {
         x = fns[i](x);
       }
       return x;
-    } catch (e) {
-      error.forEach(h => h(e));
+    } catch (err) {
+      error.forEach((e) => e(err));
       return undefined;
     }
   };
@@ -23,15 +23,12 @@ const compose = (...fns) => {
 
 const inc = x => x + 1;        
 const twice = x => x * 2;      
-const fail = x => { throw new Error("Помилка!"); };
+const cube = x => x**3 ;
 
-const f1 = compose(inc, twice, inc); 
+const f1 = compose(inc, twice, cube); 
 console.log(f1(5));
 
 
-const f2 = compose(inc, fail, twice);
-
-f2.on("error", e => console.log( e.message));
-
+const f2 = compose(inc, cube, twice);
 
 console.log(f2(5));
