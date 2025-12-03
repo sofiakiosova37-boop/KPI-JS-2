@@ -4,12 +4,11 @@ const pipe = (...fns) => {
   
   for (const fn of fns) {
     if (typeof fn !== 'function') {
-      throw new TypeError('All arguments must be functions');
+      throw new Error('All arguments must be functions');
     }
   }
 
-  return (x) => {
-    return fns.reduce((acc, fn) => fn(acc), x);
+  return (x) => fns.reduce((acc, fn) => fn(acc), x);
   };
 };
 
@@ -19,5 +18,9 @@ const cube = x => x ** 3;
 
 const f = pipe(inc, twice, cube);
 console.log(f(5));
+console.log(f(7));
+
+console.log(pipe(inc, 7, cube)(2));
+
 
 
