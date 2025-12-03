@@ -1,5 +1,5 @@
 const compose = (...fns) => {
-  const handlers = [];
+  const error = [];
 
   const composed = x => {
     try {
@@ -8,13 +8,13 @@ const compose = (...fns) => {
       }
       return x;
     } catch (e) {
-      handlers.forEach(h => h(e));
+      error.forEach(h => h(e));
       return undefined;
     }
   };
 
   composed.on = (event, handler) => {
-    if (event === "error") handlers.push(handler);
+    if (event === "error") error.push(handler);
   };
 
   return composed;
@@ -30,6 +30,6 @@ console.log(f1(5));
 
 const f2 = compose(inc, fail, twice);
 
-f2.on("error", e => console.log( e.message));
+
 
 console.log(f2(5));
