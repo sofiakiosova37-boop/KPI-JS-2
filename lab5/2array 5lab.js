@@ -1,4 +1,3 @@
-'use strict';
 
 'use strict';
 
@@ -35,6 +34,7 @@ console.log(arr.pop());
 console.log(arr.pop()); 
 
 console.log(arr.pop()); 
+
 
 
 
